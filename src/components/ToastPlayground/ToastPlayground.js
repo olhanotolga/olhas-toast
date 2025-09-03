@@ -10,6 +10,7 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
   const [currentMessage, setCurrentMessage] = useState('');
   const [currentVariant, setCurrentVariant] = useState(VARIANT_OPTIONS[0]);
+  const [isToastShown, setIsToastShown] = useState(false);
 
   return (
     <div className={styles.wrapper}>
@@ -18,7 +19,13 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <Toast variant={currentVariant} content={currentMessage} />
+      {isToastShown && (
+        <Toast
+          variant={currentVariant}
+          content={currentMessage}
+          handleHideToast={() => setIsToastShown(false)}
+        />
+      )}
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -61,7 +68,9 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button handleClick={() => setIsToastShown(true)}>
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
