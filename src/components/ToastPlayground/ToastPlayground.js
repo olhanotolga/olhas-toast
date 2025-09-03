@@ -22,9 +22,10 @@ function ToastPlayground() {
       {isToastShown && (
         <Toast
           variant={currentVariant}
-          content={currentMessage}
           handleHideToast={() => setIsToastShown(false)}
-        />
+        >
+          {currentMessage}
+        </Toast>
       )}
 
       <div className={styles.controlsWrapper}>
