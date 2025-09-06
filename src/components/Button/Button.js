@@ -2,10 +2,11 @@ import React from 'react';
 
 import styles from './Button.module.css';
 
-function Button({ className = '', ...delegated }) {
+function Button({ className = '', handleClick, ...delegated }) {
   return (
     <button
       className={`${styles.button} ${className}`}
+      onClick={handleClick}
       {...delegated}
     />
   );
