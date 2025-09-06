@@ -1,15 +1,16 @@
-import React, { createContext, useState, useEffect } from 'react';
-import useEscapeKey from '../../hooks/';
+import React, { createContext, useState, useCallback } from 'react';
+import useKeyDown from '../../hooks/';
 
 export const ToastContext = createContext();
 
 function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  function dismissToasts() {
+  const dismissToasts = useCallback(() => {
     setToasts([]);
-  }
-  useEscapeKey(dismissToasts);
+  }, []);
+
+  useKeyDown('Escape', dismissToasts);
 
   function createToast(message, variant) {
     const newToast = {
